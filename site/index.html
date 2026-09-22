@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d10">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Black Mirror · Pocket Guide</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/icon-192.png">
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <header class="top">
+    <button class="brand" data-go="guide" aria-label="Home">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span class="brand-text"><b>BLACK MIRROR</b><small>The Long Shadow of the Future</small></span>
+    </button>
+    <div class="top-actions">
+      <button class="icon-btn locate-btn" id="locateBtn" aria-label="Where am I? Point your camera">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V6a2 2 0 0 1 2-2h2M16 4h2a2 2 0 0 1 2 2v2M20 16v2a2 2 0 0 1-2 2h-2M8 20H6a2 2 0 0 1-2-2v-2"/><circle cx="12" cy="12" r="3.2"/></svg>
+        <span>Where am I?</span>
+      </button>
+      <button class="icon-btn" id="settingsBtn" aria-label="Sound &amp; voice settings">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="app">
+    <!-- GUIDE -->
+    <section class="view view-guide active" data-view="guide">
+      <nav class="paths" id="pathChips" aria-label="Thematic paths"></nav>
+      <div class="guide-grid">
+        <div class="map-col">
+          <div class="map-card" id="mapCard">
+            <svg id="plan" role="img" aria-label="Floor plan of the exhibition"></svg>
+            <div class="map-tools">
+              <button class="chip-btn" id="zoomReset" aria-label="Reset map zoom">⤢</button>
+            </div>
+            <div class="map-hint" id="mapHint">Tap a dot · pinch to zoom · long-press to say “I’m here”</div>
+          </div>
+          <div class="near" id="nearBox" hidden>
+            <h3 class="eyebrow">Near you</h3>
+            <div class="near-list" id="nearList"></div>
+          </div>
+        </div>
+        <div class="list-col">
+          <div class="path-head" id="pathHead"></div>
+          <ol class="stops" id="stopList"></ol>
+          <section class="threads-box">
+            <h3 class="eyebrow">Threads across the paths</h3>
+            <div class="threads" id="threadList"></div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- LAB -->
+    <section class="view view-lab" data-view="lab">
+      <div class="lab" id="lab"></div>
+    </section>
+
+    <!-- ME -->
+    <section class="view view-me" data-view="me">
+      <div class="me" id="me"></div>
+    </section>
+  </main>
+
+  <!-- Artwork sheet -->
+  <div class="sheet-backdrop" id="sheetBackdrop" hidden></div>
+  <article class="sheet" id="sheet" aria-modal="true" role="dialog" hidden></article>
+
+  <!-- Reader (expanded player) -->
+  <section class="reader" id="reader" hidden aria-label="Now playing"></section>
+
+  <!-- Mini player -->
+  <div class="mini" id="mini" hidden>
+    <div class="mini-progress"><i id="miniBar"></i></div>
+    <button class="mini-main" id="miniOpen" aria-label="Open text view">
+      <img id="miniImg" alt="">
+      <span class="mini-meta"><b id="miniTitle"></b><small id="miniSub"></small></span>
+    </button>
+    <button class="round" id="miniPlay" aria-label="Play or pause"></button>
+  </div>
+
+  <nav class="tabs" aria-label="Sections">
+    <button data-go="guide" class="active"><svg viewBox="0 0 24 24"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span>Guide</span></button>
+    <button data-go="lab"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg><span>Remix Lab</span></button>
+    <button data-go="me"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg><span>My picks</span></button>
+  </nav>
+
+  <!-- Settings -->
+  <dialog class="settings" id="settings"></dialog>
+
+  <!-- Camera / locate -->
+  <section class="cam" id="cam" hidden aria-label="Point your camera at an artwork"></section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

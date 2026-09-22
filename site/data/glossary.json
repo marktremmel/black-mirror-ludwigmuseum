@@ -1,0 +1,787 @@
+[
+{
+"id": "dystopia",
+"match": [
+"dystopias?",
+"dystopian",
+"dystopium"
+],
+"title": "Dystopia",
+"text": "An imagined society that went badly wrong: control, fear, no freedom. Think Black Mirror, The Hunger Games or 1984. The opposite of a utopia."
+},
+{
+"id": "utopia",
+"match": [
+"utopias?",
+"utopian"
+],
+"title": "Utopia",
+"text": "An imagined perfect society. The word comes from Greek and literally means 'no place', so it hints that it can't really exist."
+},
+{
+"id": "anti-utopia",
+"match": [
+"anti-utopias?",
+"negative utopias?"
+],
+"title": "Anti-utopia",
+"text": "Another word for dystopia: a story that shows how a dream of a perfect world turns into a nightmare."
+},
+{
+"id": "post-utopian",
+"match": [
+"post-utopian"
+],
+"title": "Post-utopian",
+"text": "The feeling that nobody believes in a big, bright future plan anymore. The dream is over and we're living in the 'after'."
+},
+{
+"id": "grand-narratives",
+"match": [
+"grand narratives?"
+],
+"title": "Grand narratives",
+"text": "Big stories that claim to explain everything and where history is going, like 'progress will fix everything' or 'communism will make everyone equal'. Many thinkers say people stopped believing in them."
+},
+{
+"id": "totalitarian",
+"match": [
+"totalitarian"
+],
+"title": "Totalitarian",
+"text": "A system where the state tries to control everything: politics, media, school, work, even what people think. Nazi Germany and Stalin's Soviet Union are the classic examples."
+},
+{
+"id": "technocratic",
+"match": [
+"technocratic",
+"technocracy"
+],
+"title": "Technocratic",
+"text": "Run by experts, engineers and systems instead of by public debate. Sounds efficient, but can leave people with little say."
+},
+{
+"id": "dehumanising",
+"match": [
+"dehumanising",
+"dehumanized",
+"dehumanisation"
+],
+"title": "Dehumanising",
+"text": "Treating people like objects or numbers instead of human beings with feelings and rights."
+},
+{
+"id": "ideology",
+"match": [
+"ideology",
+"ideologies",
+"ideological"
+],
+"title": "Ideology",
+"text": "A set of beliefs about how society should work, like communism, liberalism or nationalism. It shapes what people think is normal, fair and possible."
+},
+{
+"id": "end-of-ideology",
+"match": [
+"Daniel Bell"
+],
+"title": "Daniel Bell, 'The End of Ideology'",
+"text": "An American sociologist who argued in 1960 that the big political belief systems were losing their power, replaced by practical, day-to-day politics."
+},
+{
+"id": "socialism",
+"match": [
+"socialism",
+"socialist"
+],
+"title": "Socialism (in Eastern Europe)",
+"text": "In Hungary and its neighbours, the system from roughly 1948 to 1989: one party ruled, the state owned factories and planned the economy. It promised equality but limited freedom."
+},
+{
+"id": "existing-socialism",
+"match": [
+"existing socialism"
+],
+"title": "'Existing socialism'",
+"text": "A half-ironic name for socialism as people actually lived it, grey and full of shortages, as opposed to the shiny version in the posters."
+},
+{
+"id": "communism",
+"match": [
+"communism",
+"communist"
+],
+"title": "Communism",
+"text": "The idea of a society with no private property and no classes. The regimes that called themselves communist in the 20th century were one-party states, often very repressive."
+},
+{
+"id": "marxism",
+"match": [
+"Marxism",
+"neo-Marxist",
+"Marxist"
+],
+"title": "Marxism",
+"text": "The ideas of Karl Marx (1800s): history is driven by conflict between classes, like workers vs. factory owners. The theory behind communist movements."
+},
+{
+"id": "dialectical-materialism",
+"match": [
+"dialectical materialism"
+],
+"title": "Dialectical materialism",
+"text": "The official philosophy taught in communist countries: the world is shaped by material conditions and constant conflict of opposites. Students in socialist Hungary had to study it."
+},
+{
+"id": "propaganda",
+"match": [
+"propaganda"
+],
+"title": "Propaganda",
+"text": "Messages designed to push people to believe or do something, usually by a government. Posters, slogans, films, badges, parades."
+},
+{
+"id": "agitprop",
+"match": [
+"agitprop",
+"agit prop",
+"agitation"
+],
+"title": "Agitprop",
+"text": "Short for 'agitation and propaganda': Soviet-style art made to stir people up and spread political messages, often posters, trains, theatre."
+},
+{
+"id": "rosta",
+"match": [
+"Rosta windows",
+"Mayakovsky"
+],
+"title": "Mayakovsky's ROSTA windows",
+"text": "In the early 1920s the poet Vladimir Mayakovsky made quick, comic-strip-like posters for the Soviet news agency ROSTA and put them up in shop windows. Basically memes before the internet."
+},
+{
+"id": "avant-garde",
+"match": [
+"avant-garde"
+],
+"title": "Avant-garde",
+"text": "French for 'front guard': artists who break the rules and try radically new things. The early 1900s avant-garde wanted art to change society itself."
+},
+{
+"id": "neo-avant-garde",
+"match": [
+"neo-avant-garde"
+],
+"title": "Neo-avant-garde",
+"text": "The experimental artists of the 1960s and 70s who picked up the old avant-garde ideas. In socialist Hungary this was often unofficial, semi-tolerated art."
+},
+{
+"id": "constructivism",
+"match": [
+"constructivism",
+"constructivist"
+],
+"title": "Constructivism",
+"text": "A Russian art movement (1910s to 1930s): art should be useful and build a new society, using clean geometric shapes, industrial materials and bold graphics."
+},
+{
+"id": "tatlin",
+"match": [
+"Tatlin"
+],
+"title": "Tatlin's Tower",
+"text": "Vladimir Tatlin designed a spiralling 400-metre steel tower (1919) as the headquarters of world communism. It was never built, but it became the icon of utopian architecture."
+},
+{
+"id": "kassak",
+"match": [
+"Kassák"
+],
+"title": "Lajos Kassák",
+"text": "Hungarian avant-garde poet, painter and editor (1887 to 1967). His 'picture architecture' used flat geometric shapes and inspired Tamás Kaszás's kiosks."
+},
+{
+"id": "bauhaus",
+"match": [
+"Bauhaus"
+],
+"title": "Bauhaus",
+"text": "A famous German design school (1919 to 1933). Its simple, functional style still shapes furniture, fonts and buildings today."
+},
+{
+"id": "moholy-nagy",
+"match": [
+"Moholy-Nagy"
+],
+"title": "László Moholy-Nagy",
+"text": "A Hungarian artist who taught at the Bauhaus and experimented with photography, light and machines. A Budapest art university is named after him."
+},
+{
+"id": "photogram",
+"match": [
+"photograms?",
+"cameraless photography"
+],
+"title": "Photogram",
+"text": "A photo made without a camera: you put objects on light-sensitive paper and expose it to light, so their shadows become the image."
+},
+{
+"id": "conceptual-art",
+"match": [
+"conceptual art",
+"conceptualism",
+"post-conceptual"
+],
+"title": "Conceptual art",
+"text": "Art where the idea matters more than the finished object. Sometimes the 'artwork' is a plan, a text or an action."
+},
+{
+"id": "le-corbusier",
+"match": [
+"Le Corbusier"
+],
+"title": "Le Corbusier",
+"text": "A Swiss-French architect (1887 to 1965), famous for concrete housing blocks and the idea that a house is 'a machine for living in'. Loved and hated in equal measure."
+},
+{
+"id": "dom-ino",
+"match": [
+"Dom-Ino"
+],
+"title": "Dom-Ino House",
+"text": "Le Corbusier's 1914 design: just concrete floors on pillars, so walls can go anywhere. The skeleton behind countless apartment blocks."
+},
+{
+"id": "loos",
+"match": [
+"Adolf Loos",
+"Ornament and Crime",
+"Ornament and Sin"
+],
+"title": "Adolf Loos, 'Ornament and Crime'",
+"text": "A 1908 essay by a Viennese architect claiming decoration is wasteful and backward. It became a slogan of modern, plain architecture."
+},
+{
+"id": "modernism",
+"match": [
+"modernism",
+"modernist",
+"modernity"
+],
+"title": "Modernism / modernity",
+"text": "The big belief (roughly 1900 to 1970) that science, technology and rational planning would make life better, reflected in clean, functional design."
+},
+{
+"id": "uncanny",
+"match": [
+"uncanny",
+"Unheimliche"
+],
+"title": "The uncanny",
+"text": "Freud's term for something familiar that suddenly feels strange and creepy, like a doll that seems almost alive. 'Unheimlich' in German."
+},
+{
+"id": "freud",
+"match": [
+"Freud"
+],
+"title": "Sigmund Freud",
+"text": "Austrian doctor (1856 to 1939) who founded psychoanalysis, the idea that hidden wishes and fears in the unconscious shape how we act."
+},
+{
+"id": "nietzsche",
+"match": [
+"Nietzsche"
+],
+"title": "Friedrich Nietzsche",
+"text": "German philosopher (1844 to 1900). 'Has it not become colder?' comes from his book The Gay Science, where he describes a world that lost its old certainties."
+},
+{
+"id": "non-places",
+"match": [
+"non-places?",
+"non-lieux",
+"Marc Augé"
+],
+"title": "Non-places",
+"text": "The French anthropologist Marc Augé's word for spaces you just pass through without belonging: airports, malls, motorways, waiting rooms."
+},
+{
+"id": "metropolis",
+"match": [
+"Fritz Lang",
+"Metropolis"
+],
+"title": "Metropolis (1927)",
+"text": "Fritz Lang's silent sci-fi film about a futuristic city where workers toil underground for the rich above. One of the first great film dystopias."
+},
+{
+"id": "anthropocene",
+"match": [
+"post-Anthropocene",
+"Anthropocene"
+],
+"title": "Anthropocene",
+"text": "A proposed name for our era, in which humans have become the main force changing the planet: climate, rocks, oceans, species."
+},
+{
+"id": "lichtenberg",
+"match": [
+"Lichtenberg figures?",
+"Lichtenberg"
+],
+"title": "Lichtenberg figures",
+"text": "Branching, tree-like patterns left by electric discharges, discovered by the physicist Georg Christoph Lichtenberg in the 1700s. Lightning leaves them too."
+},
+{
+"id": "corpus-delicti",
+"match": [
+"corpus delicti"
+],
+"title": "Corpus delicti",
+"text": "Latin legal term for the evidence of a crime. Here: the junk itself is the proof of what we did."
+},
+{
+"id": "totem",
+"match": [
+"totems?"
+],
+"title": "Totem",
+"text": "An object, animal or figure that a group treats as its sacred symbol or spiritual ancestor."
+},
+{
+"id": "semiotic",
+"match": [
+"semiotic"
+],
+"title": "Semiotics",
+"text": "The study of signs and symbols and how they carry meaning, from words to logos to traffic lights."
+},
+{
+"id": "venice-biennale",
+"match": [
+"Venice Biennale",
+"La Biennale di Venezia",
+"Biennale"
+],
+"title": "Venice Biennale",
+"text": "The world's most famous contemporary art exhibition, held every two years in Venice. Countries send artists to their national pavilions, like an art Olympics."
+},
+{
+"id": "enlightenment",
+"match": [
+"Enlightenment"
+],
+"title": "The Enlightenment",
+"text": "The 1700s movement that trusted reason and science to improve humanity. Much of our modern world grew out of it."
+},
+{
+"id": "similia",
+"match": [
+"similias?"
+],
+"title": "Similia",
+"text": "Drozdik's own word for objects that imitate or resemble scientific specimens and props, like fake museum exhibits."
+},
+{
+"id": "vitrine",
+"match": [
+"vitrinising",
+"vitrines?"
+],
+"title": "Vitrine",
+"text": "A glass display case in a museum. 'Vitrinising' means putting something behind glass, making it an exhibit."
+},
+{
+"id": "rozsa",
+"match": [
+"Rózsa Circle"
+],
+"title": "Rózsa Circle",
+"text": "An informal group of young experimental artists who met at the Rózsa café in Budapest in the 1970s, outside the official art world."
+},
+{
+"id": "colab",
+"match": [
+"Colab"
+],
+"title": "Colab",
+"text": "Collaborative Projects, a New York artist collective of the late 1970s and 80s that made political, DIY exhibitions in unusual places."
+},
+{
+"id": "albania-1997",
+"match": [
+"pyramid scheme"
+],
+"title": "Albania, 1997",
+"text": "Huge investment scams promised impossible profits, then collapsed. Many families lost everything, and the country slid into armed chaos."
+},
+{
+"id": "danto",
+"match": [
+"Arthur C. Danto",
+"Danto"
+],
+"title": "Arthur C. Danto",
+"text": "American philosopher who asked what turns an ordinary thing, like a soap box, into art. His answer: the ideas and institutions around it."
+},
+{
+"id": "larp",
+"match": [
+"LARP",
+"live-action role-playing"
+],
+"title": "LARP",
+"text": "Live-action role-playing: people dress up and physically act out a fictional world together, like a video game in real life."
+},
+{
+"id": "narratology",
+"match": [
+"narratology"
+],
+"title": "Narratology",
+"text": "The study of how stories are built: who tells them, in what order, and why they work."
+},
+{
+"id": "prepper",
+"match": [
+"prepper"
+],
+"title": "Prepper",
+"text": "Someone who stockpiles food, tools and supplies, preparing for a disaster or the collapse of society."
+},
+{
+"id": "turul",
+"match": [
+"Turul"
+],
+"title": "Turul",
+"text": "A mythical bird of prey from Hungarian origin legends. It is a national symbol, and nationalists like to use it."
+},
+{
+"id": "hungarofuturism",
+"match": [
+"Hungarofuturism",
+"Hungarofuturist"
+],
+"title": "Hungarofuturism",
+"text": "A playful art movement that mixes Hungarian myths and folk art with sci-fi, cyborgs and space travel, to poke fun at nationalist myth-making."
+},
+{
+"id": "over-identification",
+"match": [
+"over-identification"
+],
+"title": "Over-identification",
+"text": "An art strategy: instead of mocking something openly, you take it so seriously and so far that its absurdity shows by itself."
+},
+{
+"id": "anachronistic",
+"match": [
+"anachronistic",
+"anachronism"
+],
+"title": "Anachronistic",
+"text": "Out of its proper time, like a knight holding a smartphone."
+},
+{
+"id": "uchronian",
+"match": [
+"uchronian",
+"uchronia"
+],
+"title": "Uchronia",
+"text": "Like utopia but for time: an imagined alternative history, a 'what if' timeline that never happened."
+},
+{
+"id": "carpathian",
+"match": [
+"Carpathian Basin"
+],
+"title": "Carpathian Basin",
+"text": "The large lowland ringed by the Carpathian mountains, where Hungary lies. Nationalists often use it to mean 'historic Hungary'."
+},
+{
+"id": "irredentist",
+"match": [
+"irredentists?",
+"irredentism"
+],
+"title": "Irredentism",
+"text": "The demand to take back land a country once had, like the 'Greater Hungary' idea after 1920. The map shows every country at its most greedy size, all at once."
+},
+{
+"id": "ceausescu",
+"match": [
+"Ceaușescu",
+"Ceauşescu",
+"Ceaușima"
+],
+"title": "Nicolae Ceaușescu",
+"text": "Romania's communist dictator from 1965 to 1989. Known for a personality cult, secret police, food shortages and bulldozing old towns. Overthrown and executed in 1989."
+},
+{
+"id": "systematisation",
+"match": [
+"Systematisation"
+],
+"title": "Systematisation",
+"text": "Ceaușescu's plan to demolish villages and historic city centres and replace them with standard concrete blocks and grand avenues."
+},
+{
+"id": "decommunization",
+"match": [
+"decommunization",
+"Leninopad"
+],
+"title": "Decommunisation in Ukraine",
+"text": "After 2015 Ukraine banned communist symbols, so thousands of Lenin statues came down. People called it 'Leninopad', the Lenin-fall."
+},
+{
+"id": "maidan",
+"match": [
+"Revolution of Dignity",
+"Maidan"
+],
+"title": "Maidan / Revolution of Dignity",
+"text": "Mass protests in Kyiv's Maidan square in 2013 and 2014 that removed Ukraine's pro-Russian president."
+},
+{
+"id": "lenin",
+"match": [
+"Lenin Mausoleum",
+"embalmed"
+],
+"title": "Lenin's Mausoleum",
+"text": "Lenin died in 1924, and his embalmed body is still on public display in a tomb on Red Square in Moscow."
+},
+{
+"id": "kadar",
+"match": [
+"János Kádár",
+"Kádár"
+],
+"title": "János Kádár",
+"text": "Leader of socialist Hungary from 1956 to 1988. His era was called 'goulash communism': a bit more comfort and freedom than elsewhere in the Eastern Bloc, in exchange for keeping quiet."
+},
+{
+"id": "may-day",
+"match": [
+"labour day parade",
+"May 1st parade",
+"1st of May"
+],
+"title": "May Day parade",
+"text": "Under socialism, 1 May (Workers' Day) meant compulsory marches with banners and portraits of leaders past the officials' stand. Afterwards: beer and sausages in the park."
+},
+{
+"id": "perestroika",
+"match": [
+"Perestroika"
+],
+"title": "Perestroika",
+"text": "'Restructuring': Gorbachev's reforms in the late-1980s Soviet Union that loosened control and ended up speeding its collapse."
+},
+{
+"id": "yeltsin",
+"match": [
+"Yeltsin"
+],
+"title": "Boris Yeltsin",
+"text": "Russia's first president (1991 to 1999). His era was chaotic: wild capitalism, poverty and oligarchs."
+},
+{
+"id": "eastern-bloc",
+"match": [
+"Eastern Bloc"
+],
+"title": "Eastern Bloc",
+"text": "The socialist countries of Central and Eastern Europe under Soviet influence after World War II, Hungary included, until 1989."
+},
+{
+"id": "ayn-rand",
+"match": [
+"Ayn Rand",
+"objectivist",
+"libertarianism"
+],
+"title": "Ayn Rand",
+"text": "A Russian-American writer who celebrated selfishness and the lone genius, and hated the state. A hero of free-market libertarians."
+},
+{
+"id": "closed-circuit",
+"match": [
+"closed-circuit"
+],
+"title": "Closed-circuit video",
+"text": "A camera connected straight to a screen in the same space, like CCTV. You see yourself live, inside the artwork."
+},
+{
+"id": "zkm",
+"match": [
+"ZKM",
+"Ars Electronica"
+],
+"title": "ZKM / Ars Electronica",
+"text": "Two big European centres for media and technology art, in Karlsruhe (Germany) and Linz (Austria)."
+},
+{
+"id": "one-country",
+"match": [
+"one country, two systems"
+],
+"title": "'One country, two systems'",
+"text": "The deal under which Hong Kong returned to China in 1997, keeping its own laws and freedoms for 50 years. In recent years Beijing has tightened control a lot."
+},
+{
+"id": "blade-runner",
+"match": [
+"Blade Runner"
+],
+"title": "Blade Runner (1982)",
+"text": "Ridley Scott's sci-fi film of a rainy, neon-lit future city. It shaped how we picture cyberpunk to this day."
+},
+{
+"id": "phalanstery",
+"match": [
+"phalanstery",
+"Charles Fourier"
+],
+"title": "Phalanstery",
+"text": "Charles Fourier's 1800s utopian plan: a huge building where about 1,600 people live and work together as one community."
+},
+{
+"id": "tarkovsky",
+"match": [
+"Tarkovsky"
+],
+"title": "Andrei Tarkovsky",
+"text": "A Soviet film director famous for slow, dreamlike films. 'The Sacrifice' (1986) was his last."
+},
+{
+"id": "svejk",
+"match": [
+"Švejk",
+"Hašek"
+],
+"title": "The Good Soldier Švejk",
+"text": "Jaroslav Hašek's comic Czech novel (1920s) about a soldier who survives the army by pretending to be an idiot, or maybe being one."
+},
+{
+"id": "albinoni",
+"match": [
+"Albinoni"
+],
+"title": "Albinoni's Adagio",
+"text": "A very sad, very famous piece of string music, often played at funerals and in dramatic film scenes."
+},
+{
+"id": "arcadia",
+"match": [
+"Arcadia"
+],
+"title": "Arcadia",
+"text": "A region of Greece that poets turned into a symbol of an innocent, peaceful paradise. Using it as a title here is ironic."
+},
+{
+"id": "mail-art",
+"match": [
+"mail art"
+],
+"title": "Mail art",
+"text": "Art sent by post: postcards, stamps, envelopes. In the socialist era it let artists connect across borders and dodge censorship."
+},
+{
+"id": "readymade",
+"match": [
+"ready-made",
+"readymade"
+],
+"title": "Readymade",
+"text": "An everyday object that an artist declares to be art. The idea started with Marcel Duchamp's urinal in 1917."
+},
+{
+"id": "volkshochschule",
+"match": [
+"Volkshochschule"
+],
+"title": "Volkshochschule",
+"text": "German for 'people's high school': adult education centres with evening courses, like the Hungarian 'művelődési ház'."
+},
+{
+"id": "regime-change",
+"match": [
+"political transition",
+"democratic transition"
+],
+"title": "The transition (1989 to 1990)",
+"text": "When Hungary and its neighbours switched from one-party socialism to democracy and market economy. In Hungarian: 'rendszerváltás'."
+},
+{
+"id": "office-monkeys",
+"match": [
+"office monkeys"
+],
+"title": "'Office monkeys'",
+"text": "Slang (in Ukraine and Russia 'office plankton') for low-level office workers doing the same grey routine every day."
+},
+{
+"id": "ukraine-2004-2014",
+"match": [
+"in Ukraine in 2004"
+],
+"title": "Ukraine 2004 and 2014",
+"text": "Two waves of mass street protest: the Orange Revolution (2004) against a rigged election, and the Maidan (2013 to 2014), after which Russia annexed Crimea and war began in the east."
+},
+{
+"id": "ambivalence",
+"match": [
+"ambivalence",
+"ambivalent",
+"ambivalences"
+],
+"title": "Ambivalent",
+"text": "Feeling two opposite things at once, like being both attracted to and scared of something."
+},
+{
+"id": "allegory",
+"match": [
+"allegory"
+],
+"title": "Allegory",
+"text": "A picture or story where everything stands for something else, like a train that isn't really about trains."
+},
+{
+"id": "bad-painting",
+"match": [
+"bad painting"
+],
+"title": "'Bad painting'",
+"text": "A style that looks clumsy or amateurish on purpose, to be funnier, more honest, or to mock 'serious' art."
+},
+{
+"id": "woodcut",
+"match": [
+"woodcut",
+"woodcarving"
+],
+"title": "Woodcut",
+"text": "A print made by carving an image into a block of wood, inking it and pressing it onto paper. One of the oldest printing techniques."
+},
+{
+"id": "video-art",
+"match": [
+"video art"
+],
+"title": "Video art",
+"text": "Art made with video and TV screens. Nam June Paik started it in the 1960s, when a TV was a strange new box in the living room."
+},
+{
+"id": "monument",
+"match": [
+"Monument to a Monument"
+],
+"title": "Monument to the worker",
+"text": "Socialist cities were full of heroic statues of workers. Csákány's statue of himself as a worker on a lamp post plays with that tradition."
+}
+]

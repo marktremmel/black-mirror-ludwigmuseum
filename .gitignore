@@ -1,0 +1,16 @@
+# Raw asset packs: their licences allow use in a project, not redistribution of the packs.
+/stickers/
+# Copyrighted music: never on a public host (see README).
+/music-optional/
+/Arcade Fire*/
+# Source material the built site already contains in web-sized form.
+Ludwig.pages
+/*.jpg
+/*.JPG
+/*.png
+/*.PNG
+# Local junk
+.DS_Store
+**/.DS_Store
+/tools/node_modules/
+/site/music/

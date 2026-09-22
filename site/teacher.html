@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Black Mirror · Teacher mode</title>
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/app.css">
+  <style>
+    body { padding-bottom: 40px; }
+    .t-wrap { max-width: 1000px; margin: 0 auto; padding: 20px 16px; }
+    .drop { border: 2px dashed var(--line); border-radius: 18px; padding: 28px 16px; text-align: center; color: var(--muted); transition: .2s; }
+    .drop.over { border-color: var(--accent); background: #7fb2cf14; color: var(--text); }
+    .t-grid { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); margin-top: 14px; }
+    .lb { display: grid; gap: 8px; }
+    .lb-row { display: grid; grid-template-columns: 26px 54px 1fr auto; gap: 10px; align-items: center; }
+    .lb-row img { width: 54px; height: 42px; object-fit: cover; border-radius: 8px; }
+    .lb-row b { font-size: 14px; display: block; }
+    .lb-row small { color: var(--muted); font-size: 12px; }
+    .lb-bar { height: 5px; border-radius: 3px; background: var(--c); margin-top: 4px; }
+    .pts { font: 700 16px ui-monospace, Menlo, monospace; }
+    .vb { display: grid; grid-template-columns: 28px 1fr 34px; gap: 8px; align-items: center; font-size: 13px; margin: 6px 0; }
+    .vb i { display: block; height: 10px; border-radius: 5px; background: var(--v); }
+    .big { font-size: 40px; font-weight: 800; }
+    .wall { columns: 2 260px; gap: 12px; }
+    .wall blockquote { break-inside: avoid; margin: 0 0 12px; padding: 12px 14px; border-radius: 12px; background: var(--surface2); font-family: var(--serif); font-size: 17px; line-height: 1.4; }
+    .wall cite { display: block; font: 12px var(--font); color: var(--muted); margin-top: 6px; font-style: normal; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    td, th { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+    th { color: var(--muted); font-weight: 600; }
+    code { font-family: ui-monospace, Menlo, monospace; }
+  </style>
+</head>
+<body>
+  <div class="t-wrap">
+    <a href="./" class="btn small ghost">← Back to the guide</a>
+    <h1 style="font-size:26px;margin:14px 0 4px">Teacher mode</h1>
+    <p style="color:var(--muted);margin:0 0 16px">Drop the students’ PDFs here, or paste their codes. Everything stays in this browser: nothing is uploaded.</p>
+    <div class="drop" id="drop">
+      <p style="margin:0 0 10px"><b>Drop PDFs here</b> (as many as you like)</p>
+      <label class="btn small"><input type="file" id="files" accept="application/pdf" multiple hidden>Choose files</label>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <h3>…or paste codes</h3>
+      <p>One per line, e.g. <code>BM-7Q2K-9XRA</code>. You can add a name after it: <code>BM-7Q2K-9XRA Anna 10.B</code></p>
+      <textarea class="textin ta" id="codes" rows="4" placeholder="BM-XXXX-XXXX"></textarea>
+    </div>
+    <div id="out"></div>
+  </div>
+  <script type="module" src="js/teacher.js"></script>
+</body>
+</html>
