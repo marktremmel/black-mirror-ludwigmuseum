@@ -88,8 +88,7 @@ function selectPath(id, scroll = true) {
 
 // Everything in the UI is sized in rem, so one number scales the whole interface.
 function applyTextScale() {
-  const base = matchMedia("(max-width: 480px)").matches ? 18 : 17;
-  document.documentElement.style.fontSize = (base * (store.get("textScale") || 1)).toFixed(2) + "px";
+  document.documentElement.style.fontSize = (16 * (store.get("textScale") || 1)).toFixed(2) + "px";
 }
 
 function segDur(seg) { return narrator.indexes[store.get("voice")]?.[seg]?.dur; }
@@ -523,8 +522,8 @@ async function openSettings() {
         <div class="seg">${[0.9, 1, 1.1, 1.25, 1.4].map((x) => `<button data-rate="${x}" class="${x === store.get("rate") ? "on" : ""}">${x}×</button>`).join("")}</div>
       </div>
       <div class="set-group"><h3 class="eyebrow">Text size</h3>
-        <div class="seg">${[[0.9, "A"], [1.1, "A"], [1.25, "A"], [1.4, "A"], [1.6, "A"]].map(([v], i) => `<button data-scale="${v}" class="${v === (store.get("textScale") || 1) ? "on" : ""}" style="font-size:${0.78 + i * 0.16}rem">A</button>`).join("")}</div>
-        <p style="margin-top:10px">Everything gets bigger, not just this menu. Handy in a dim gallery.</p>
+        <div class="seg">${[[0.9, "A"], [1, "A"], [1.15, "A"], [1.3, "A"], [1.5, "A"]].map(([v], i) => `<button data-scale="${v}" class="${v === (store.get("textScale") || 1) ? "on" : ""}" style="font-size:${0.78 + i * 0.16}rem">A</button>`).join("")}</div>
+        <p style="margin-top:10px">Scales the whole interface, not just this menu. Handy in a dim gallery, or if you just want more on screen.</p>
       </div>
       <div class="set-group"><h3 class="eyebrow">Music under the voice</h3>
         <div class="seg">

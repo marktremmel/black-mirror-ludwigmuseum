@@ -19,8 +19,7 @@
   --serif: "Iowan Old Style", "Charter", "Georgia", ui-serif, serif;
   color-scheme: dark;
 }
-html { font-size: 17px; }                      /* UI scale: changed by the text-size setting */
-@media (max-width: 480px) { html { font-size: 18px; } }
+html { font-size: 16px; }   /* the baseline; the text-size setting scales it */
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-text-size-adjust: 100%; }
 body { min-height: 100dvh; padding-bottom: calc(var(--tabs-h) + var(--mini-h) + var(--safe-b) + 12px); overscroll-behavior-y: none; }

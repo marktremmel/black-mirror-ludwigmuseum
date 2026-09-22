@@ -31,7 +31,7 @@ Nothing is uploaded anywhere; everything runs in the browser.
 | Live on device | the same Kokoro model generating in the browser (~92 MB one-time download) | laptops, curious students, 13 voices |
 | Phone voice | the built-in system speech | fallback |
 
-Text size is adjustable in ⚙ (five steps, the whole interface scales, not just the article text).
+Text size is adjustable in ⚙: five steps from 0.9x to 1.5x that scale the whole interface, not just the article text.
 
 Studio voices, named by sound rather than gender: **Halo** (bright, US), **Linen** (clear, UK),
 **Basalt** (deeper, US), **Oak** (deepest, UK). Each has a "try" button.
