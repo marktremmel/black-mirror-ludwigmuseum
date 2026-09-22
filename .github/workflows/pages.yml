@@ -1,5 +1,6 @@
 # Publishes the site/ folder to GitHub Pages on every push to main.
-# One-time setup: repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
+# The first run switches Pages on itself. If it ever fails on that step, set it by hand:
+# repo Settings → Pages → Build and deployment → Source: "GitHub Actions".
 name: Deploy to GitHub Pages
 
 on:
@@ -25,6 +26,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true   # switches Pages on by itself the first time
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site
