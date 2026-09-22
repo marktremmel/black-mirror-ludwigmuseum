@@ -12,8 +12,8 @@ import { fileURLToPath } from "node:url";
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const voice = process.argv[2] || "af_heart";
 const only = process.argv[3]; // optional segment id filter
-const data = JSON.parse(fs.readFileSync(path.join(ROOT, "site/data/exhibition.json"), "utf8"));
-const outDir = path.join(ROOT, "site/audio", voice);
+const data = JSON.parse(fs.readFileSync(path.join(ROOT, "data/exhibition.json"), "utf8"));
+const outDir = path.join(ROOT, "audio", voice);
 fs.mkdirSync(outDir, { recursive: true });
 const idxPath = path.join(outDir, "index.json");
 const index = fs.existsSync(idxPath) ? JSON.parse(fs.readFileSync(idxPath, "utf8")) : {};

@@ -412,8 +412,8 @@ for s in SECTIONS:
 walls = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'walls.json')))
 data = dict(sections=SECTIONS, artworks=ARTWORKS, places=PLACES, threads=THREADS, paths=paths,
             plan=walls, segments=segments)
-os.makedirs(os.path.join(ROOT, 'site', 'data'), exist_ok=True)
-with open(os.path.join(ROOT, 'site', 'data', 'exhibition.json'), 'w', encoding='utf-8') as f:
+os.makedirs(os.path.join(ROOT, 'data'), exist_ok=True)
+with open(os.path.join(ROOT, 'data', 'exhibition.json'), 'w', encoding='utf-8') as f:
     json.dump(data, f, ensure_ascii=False, separators=(',', ':'))
 n = sum(len(s['sentences']) for s in segments.values())
 chars = sum(len(x['s']) for s in segments.values() for x in s['sentences'])

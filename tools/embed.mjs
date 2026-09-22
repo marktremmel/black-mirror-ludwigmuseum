@@ -13,7 +13,7 @@ const DTYPE = process.env.DT || "q4";
 const TEST = process.argv.includes("--test");
 env.allowLocalModels = false;
 
-const data = JSON.parse(fs.readFileSync(path.join(ROOT, "site/data/exhibition.json"), "utf8"));
+const data = JSON.parse(fs.readFileSync(path.join(ROOT, "data/exhibition.json"), "utf8"));
 const processor = await AutoProcessor.from_pretrained(MODEL);
 const model = await AutoModel.from_pretrained(MODEL, { dtype: DTYPE, device: "cpu" });
 
@@ -61,7 +61,7 @@ async function embed(img) {
 const refs = [];
 const t0 = Date.now();
 for (const a of data.artworks) {
-  const vs = await views(path.join(ROOT, "site", a.image), true);
+  const vs = await views(path.join(ROOT, a.image), true);
   for (const v of vs) refs.push({ id: a.id, e: await embed(v) });
 }
 console.log(`refs: ${refs.length} vectors in ${((Date.now() - t0) / 1000).toFixed(1)}s`);
@@ -73,7 +73,7 @@ const scales = refs.map((r, i) => {
   r.e.forEach((x, j) => (buf[i * dim + j] = Math.round((x / m) * 127)));
   return +(m / 127).toPrecision(6);
 });
-fs.writeFileSync(path.join(ROOT, `site/data/emb-${DTYPE}.json`), JSON.stringify({
+fs.writeFileSync(path.join(ROOT, `data/emb-${DTYPE}.json`), JSON.stringify({
   model: MODEL, dtype: DTYPE, dim, ids: refs.map((r) => r.id), scales,
   data: Buffer.from(buf.buffer).toString("base64"),
 }));

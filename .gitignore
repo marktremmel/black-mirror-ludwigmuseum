@@ -13,4 +13,4 @@ Ludwig.pages
 .DS_Store
 **/.DS_Store
 /tools/node_modules/
-/site/music/
+/music/

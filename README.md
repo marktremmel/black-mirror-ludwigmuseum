@@ -45,11 +45,12 @@ on-device models need for multi-threading.
 
 ## Put it online (needs https for the camera)
 
-**This repo deploys itself to GitHub Pages.** One-time setup: *Settings → Pages → Build and deployment →
-Source: **GitHub Actions***. Every push to `main` then publishes `site/` to
-https://marktremmel.github.io/black-mirror-ludwigmuseum/ (takes about a minute; watch it under *Actions*).
+**This repo is the site.** The app lives at the repo root (`index.html`, `js/`, `audio/`, …) so GitHub Pages
+publishes it straight from the `main` branch, no settings to change. Every push goes live at
+https://marktremmel.github.io/black-mirror-ludwigmuseum/ a minute or so later. `.nojekyll` keeps Pages from
+running Jekyll over it.
 
-Any other static host works too: drag the `site/` folder onto Netlify Drop, or use Cloudflare Pages.
+Any other static host works too: drop the whole folder onto Netlify Drop, or use Cloudflare Pages.
 The service worker adds the cross-origin-isolation headers by itself.
 The `site/` folder is about 140 MB (132 MB of it is audio, ~33 MB per voice); delete any voice folder in `site/audio/` you don’t need.
 
@@ -61,13 +62,14 @@ The `site/` folder is about 140 MB (132 MB of it is audio, ~33 MB per voice); de
 
 ## After the visit
 
-Students hand in a PDF (email or Classroom). Open `teacher.html` from My picks → Teacher mode, drop the PDFs
+Students hand in a PDF (email or Classroom). Open `teacher.html` (My picks → Teacher mode), drop the PDFs
 in and you get the tally plus a CSV. Give students [STUDENT_GUIDE.md](STUDENT_GUIDE.md) beforehand (put your
 link in where it says LINK HERE).
 
 ## Changing content
 
 - Texts, positions, threads, pronunciations: `tools/build_data.py` → `python3 tools/build_data.py`
+  (the tools write into the repo root, which is the site)
 - Re-record changed bits only: `node tools/render_audio.mjs af_heart` (per voice; skips unchanged segments)
 - Recognition references after changing photos: `DT=q4 node tools/embed.mjs && DT=fp32 node tools/embed.mjs`
 - Stickers: `python3 tools/build_stickers.py` (152 in 10 packs; cyber cutouts live in `stickers/cyber-cutout/`)

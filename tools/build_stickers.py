@@ -6,7 +6,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ST = os.path.join(ROOT, 'stickers')
-OUT = os.path.join(ROOT, 'site', 'img', 'stickers')
+OUT = os.path.join(ROOT, 'img', 'stickers')
 import shutil
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(OUT, exist_ok=True)
@@ -54,5 +54,5 @@ for key, label, files, credit in packs:
         items.append(f'img/stickers/{key}/{name}')
     manifest.append({'id': key, 'label': label, 'credit': credit, 'items': items})
 
-json.dump(manifest, open(os.path.join(ROOT, 'site', 'data', 'stickers.json'), 'w'), indent=0)
+json.dump(manifest, open(os.path.join(ROOT, 'data', 'stickers.json'), 'w'), indent=0)
 print(sum(len(p['items']) for p in manifest), 'stickers,', round(total / 1e6, 2), 'MB')
