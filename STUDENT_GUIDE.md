@@ -21,7 +21,7 @@ Open this on your phone: **LINK HERE**
 - **♡ Save** the works that get to you. They show up first when you write your reflection.
 - **Remix Lab:** photograph a work, add a filter, stickers and a caption. It's highly recommended for your hand-in!
 
-Speed, music under the voice and the voice itself are all under ⚙.
+Speed, **text size**, music under the voice and the voice itself are all under ⚙.
 
 ## After the visit: reflection (10 to 15 min)
 

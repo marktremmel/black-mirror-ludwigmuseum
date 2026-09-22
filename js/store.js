@@ -16,6 +16,7 @@ const defaults = {
   posAt: 0,
   listened: {},
   seenHint: false,
+  textScale: 1.1,
 };
 
 let state = { ...defaults };

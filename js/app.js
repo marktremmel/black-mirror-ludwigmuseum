@@ -30,6 +30,8 @@ let plan;
 let sheetId = null;
 
 // ---------------------------------------------------------------- boot
+applyTextScale();
+addEventListener("resize", applyTextScale);
 await Promise.all([loadData(), loadGlossary()]);
 initPlan();
 renderChips();
@@ -82,6 +84,12 @@ function selectPath(id, scroll = true) {
   renderStops();
   if (id !== "all") ambient.setMood(D.section[id].mood);
   if (scroll) $(`.path-chip[data-path="${id}"]`)?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+}
+
+// Everything in the UI is sized in rem, so one number scales the whole interface.
+function applyTextScale() {
+  const base = matchMedia("(max-width: 480px)").matches ? 18 : 17;
+  document.documentElement.style.fontSize = (base * (store.get("textScale") || 1)).toFixed(2) + "px";
 }
 
 function segDur(seg) { return narrator.indexes[store.get("voice")]?.[seg]?.dur; }
@@ -514,6 +522,10 @@ async function openSettings() {
       <div class="set-group"><h3 class="eyebrow">Speed</h3>
         <div class="seg">${[0.9, 1, 1.1, 1.25, 1.4].map((x) => `<button data-rate="${x}" class="${x === store.get("rate") ? "on" : ""}">${x}×</button>`).join("")}</div>
       </div>
+      <div class="set-group"><h3 class="eyebrow">Text size</h3>
+        <div class="seg">${[[0.9, "A"], [1.1, "A"], [1.25, "A"], [1.4, "A"], [1.6, "A"]].map(([v], i) => `<button data-scale="${v}" class="${v === (store.get("textScale") || 1) ? "on" : ""}" style="font-size:${0.78 + i * 0.16}rem">A</button>`).join("")}</div>
+        <p style="margin-top:10px">Everything gets bigger, not just this menu. Handy in a dim gallery.</p>
+      </div>
       <div class="set-group"><h3 class="eyebrow">Music under the voice</h3>
         <div class="seg">
           <button data-amb="off" class="${store.get("ambient") === "off" ? "on" : ""}">Off</button>
@@ -558,6 +570,11 @@ async function openSettings() {
   $$("[data-rate]", d).forEach((b) => (b.onclick = () => { narrator.setRate(+b.dataset.rate); $$("[data-rate]", d).forEach((x) => x.classList.toggle("on", x === b)); renderPathHead(); renderStops(); }));
   $$("[data-amb]", d).forEach((b) => (b.onclick = () => { ambient.setMode(b.dataset.amb); $$("[data-amb]", d).forEach((x) => x.classList.toggle("on", x === b)); }));
   $("#ambVol").oninput = (e) => ambient.setVolume(+e.target.value);
+  $$("[data-scale]", d).forEach((b) => (b.onclick = () => {
+    store.set({ textScale: +b.dataset.scale });
+    $$("[data-scale]", d).forEach((x) => x.classList.toggle("on", x === b));
+    applyTextScale();
+  }));
   $$("[data-walk]", d).forEach((b) => (b.onclick = () => {
     const v = b.dataset.walk;
     store.set(v === "wait" ? { pauseAtStops: true } : { pauseAtStops: false, walkGap: +v });
