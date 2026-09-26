@@ -74,7 +74,7 @@ link in where it says LINK HERE).
   (the tools write into the repo root, which is the site)
 - Re-record changed bits only: `node tools/render_audio.mjs af_heart` (per voice; skips unchanged segments)
 - Recognition references after changing photos: `DT=q4 node tools/embed.mjs && DT=fp32 node tools/embed.mjs`
-- Stickers: `python3 tools/build_stickers.py` (152 in 10 packs; cyber cutouts live in `stickers/cyber-cutout/`)
+- Stickers: `python3 tools/build_stickers.py` (240 in 11 packs; cyber cutouts live in `stickers/cyber-cutout/`)
 - Explanations: edit `site/data/glossary.json` (no rebuild needed)
 - Tool dependencies: `cd tools && npm install`
 
@@ -90,7 +90,7 @@ copyrighted, so don't put it on a public URL. For private or local use, copy `mu
 
 - `stickers/` — the original asset packs (276 MB of source files and zips). Using them in this app is fine
   (the Designsoup licence explicitly covers educational projects); what the licence rules out is passing the
-  raw pack along as a pack. All 152 stickers, graffiti included, ship with the app in `site/img/stickers/`.
+  raw pack along as a pack. All 240 stickers ship with the app in `img/stickers/`: the Designsoup pack in full (graffiti, signs, stickers, torn paper) apart from one explicit tag.
 - `music-optional/` and the *Her* album — copyrighted music. Keep it off any public URL.
 - The full-size original artwork photos and `Ludwig.pages`. The app ships web-sized copies in `site/img/art/`.
 

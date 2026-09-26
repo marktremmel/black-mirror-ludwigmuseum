@@ -140,7 +140,7 @@ class Lab {
       <p class="small-print">Tip: drag to move · pinch (or the corner handle) to resize & rotate · tap empty space to deselect.</p>` : ""}
       <h3 class="eyebrow" style="margin-top:22px">Saved remixes <span style="text-transform:none;letter-spacing:0;font-weight:400">· tap ✕ to delete one</span></h3>
       <div class="gallery" id="gallery"></div>
-      <p class="small-print" style="margin-top:14px">Stickers: Designsoup Urban Grunge decals · Cursed set by Ash N Ink · erikari lovely stickers · plus the capybara, cyber-beast, manga, Aria, bubloo and planet packs. Used here for a school project, not redistributed.</p>`;
+      <p class="small-print" style="margin-top:14px">Stickers: Designsoup Urban Grunge decal pack · Cursed set by Ash N Ink · erikari lovely stickers · plus the capybara, cyber-beast, manga, Aria, bubloo and planet packs. Used here for a school project, not redistributed.</p>`;
 
     const $ = (s) => r.querySelector(s);
     const fileIn = (inp) => inp && (inp.onchange = () => inp.files[0] && this.loadBlob(inp.files[0]));

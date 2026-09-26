@@ -11,9 +11,14 @@ import shutil
 shutil.rmtree(OUT, ignore_errors=True)
 os.makedirs(OUT, exist_ok=True)
 
-GRUNGE = sorted(glob.glob(os.path.join(ST, "Designsoup's Urban Grunge decal pack V1.1/Individuals/*/*.png")))
-GRAFFITI = GRUNGE[1:40]  # all tags except decal1 ('SEX'), it's a school app
-GRUNGE_PICK = [40, 41, 42, 44, 45, 46, 47, 49, 50, 51, 53, 54, 70, 73, 80, 81, 87, 92, 103, 104, 105, 114, 127, 128, 151]
+IND = os.path.join(ST, "Designsoup's Urban Grunge decal pack V1.1/Individuals")
+folder = lambda name: sorted(glob.glob(os.path.join(IND, name, '*.png')),
+                             key=lambda p: (len(os.path.basename(p)), os.path.basename(p).lower()))
+# The whole pack goes in (educational use is covered by its licence), minus the one explicit tag.
+GRAFFITI = [f for f in folder('Grafitti') if os.path.basename(f) != 'decal1.png']
+SIGNS = folder('Signs')
+STICKERS = folder('Stickers') + folder('Torn*')   # that folder name ends in a space
+
 ERIKARI_PICK = ['objects/phone-golden.png', 'objects/key-golden.png', 'objects/lantern.png', 'objects/chandelier-gold.png',
                 'objects/bell-silver.png', 'objects/teapot.png', 'objects/boook-front-red.png', 'objects/feather-pen.png',
                 'others/booh-1.png', 'others/booh-2.png', 'others/booh-3.png', 'others/booh-4.png', 'others/crown-small.png',
@@ -26,7 +31,8 @@ packs = [
     ('graffiti', 'Graffiti', GRAFFITI, 'Decals by Designsoup (Urban Grunge decal pack)'),
     ('capy', 'Capybaras', sorted(glob.glob(os.path.join(ST, 'Cute_Capybara_* Background Removed.png'))), None),
     ('cyber', 'Cyber beasts', sorted(glob.glob(os.path.join(ST, 'cyber-cutout/Cyberpunk *.png'))), None),
-    ('signs', 'Warnings & street', [GRUNGE[i] for i in GRUNGE_PICK], 'Decals by Designsoup (Urban Grunge decal pack)'),
+    ('signs', 'Signs', SIGNS, 'Decals by Designsoup (Urban Grunge decal pack)'),
+    ('stickers', 'Stickers & paper', STICKERS, 'Decals by Designsoup (Urban Grunge decal pack)'),
     ('cursed', 'Cursed', sorted(glob.glob(os.path.join(ST, 'Cursed_3set_Assets/*.png'))), 'Cursed sticker set by Ash N Ink (@AshNInk)'),
     ('moods', 'Moods', sorted(glob.glob(os.path.join(ST, 'bubloopack/*.gif'))), None),
     ('manga', 'Manga', sorted(glob.glob(os.path.join(ST, 'Manga Discord Stickers (320 x 320 px)(1)/*.png')), key=lambda p: int(os.path.basename(p)[:-4])), None),
