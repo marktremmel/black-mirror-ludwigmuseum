@@ -1,6 +1,6 @@
 // Offline support. App shell: network-first with cache fallback. Audio: only from the
 // "save for offline" cache (with proper Range support, which Safari needs), else network.
-const V = "bm-v7";
+const V = "bm-v8";
 const SHELL = [
   "./", "index.html", "css/app.css", "manifest.webmanifest",
   "js/app.js", "js/data.js", "js/store.js", "js/plan.js", "js/narrator.js", "js/ambient.js", "js/locate.js", "js/lab.js",
@@ -46,7 +46,7 @@ self.addEventListener("fetch", (e) => {
   if (req.method !== "GET") return;
   const url = new URL(req.url);
   if (req.mode === "navigate" && url.origin === location.origin) {
-    e.respondWith(fetch(req).catch(() => caches.match("index.html", { ignoreSearch: true })).then(isolate));
+    e.respondWith(fetch(req.url, { cache: "no-cache" }).catch(() => caches.match("index.html", { ignoreSearch: true })).then(isolate));
     return;
   }
 
@@ -65,7 +65,8 @@ self.addEventListener("fetch", (e) => {
     e.respondWith((async () => {
       const cache = await caches.open(V);
       try {
-        const r = await Promise.race([fetch(req), new Promise((_, no) => setTimeout(() => no(new Error("slow")), 4000))]);
+        // revalidate rather than trusting the host's cache header, so fixes land straight away
+        const r = await Promise.race([fetch(req.url, { cache: "no-cache" }), new Promise((_, no) => setTimeout(() => no(new Error("slow")), 4000))]);
         if (r.ok && r.status === 200) cache.put(req, r.clone());
         return r;
       } catch {

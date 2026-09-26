@@ -17,7 +17,7 @@ const defaults = {
   listened: {},
   seenHint: false,
   textScale: 1,
-  uiZoom: 0,          // set when we compensate for Safari's desktop mode
+  autoFit: false,     // compensate when a browser forces a desktop-width layout
   hideDesktopHint: false,
 };
 

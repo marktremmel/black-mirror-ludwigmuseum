@@ -32,7 +32,7 @@ let sheetId = null;
 // ---------------------------------------------------------------- boot
 applyTextScale();
 applyUiZoom();
-addEventListener("resize", applyTextScale);
+addEventListener("resize", () => { applyTextScale(); applyUiZoom(); });
 await Promise.all([loadData(), loadGlossary()]);
 initPlan();
 renderChips();
@@ -109,24 +109,31 @@ function selectPath(id, scroll = true) {
 
 // Safari's "Request Desktop Website" ignores the viewport meta and lays the page out at ~980px,
 // which shrinks everything on a phone. We can't override that, but page zoom cancels it out.
+// A touch device laying out at desktop width, where either the layout is wider than the
+// physical screen or the pixel ratio has been diluted by the fake ~980px viewport.
+// A real tablet fails both tests, so it never sees any of this.
+function desktopMode() {
+  const el = document.documentElement;
+  const zoom = parseFloat(el.style.zoom) || 1;          // measure the untouched layout width
+  const layout = innerWidth * zoom;
+  return layout >= 700 && matchMedia("(pointer: coarse)").matches
+    && (layout > screen.width * 1.25 || devicePixelRatio * zoom < 2);
+}
+// Recomputed every time (never stored as a number): a saved factor from one screen would be
+// wrong on the next, and would blow the interface up.
 function applyUiZoom() {
-  const z = store.get("uiZoom");
-  if (z > 1) document.documentElement.style.zoom = z;
+  const el = document.documentElement;
+  const on = store.get("autoFit") && desktopMode();
+  el.style.zoom = on ? Math.min(3, Math.max(1.2, +((innerWidth * (parseFloat(el.style.zoom) || 1)) / 390).toFixed(2))) : "";
   setTimeout(desktopHint, 600);
 }
 function desktopHint() {
   const bar = $("#fitbar");
-  // a touch device laying out at desktop width, where either the layout is wider than the
-  // physical screen or the pixel ratio has been diluted by the fake 980px viewport.
-  // A real tablet fails both tests, so it never sees this.
-  const wide = innerWidth >= 700 && matchMedia("(pointer: coarse)").matches
-    && (innerWidth > screen.width * 1.25 || devicePixelRatio < 2);
-  if (!wide || store.get("uiZoom") > 1 || store.get("hideDesktopHint")) return;
+  if (!desktopMode() || store.get("autoFit") || store.get("hideDesktopHint")) { bar.hidden = true; return; }
   bar.hidden = false;
   $("#fitNow").onclick = () => {
-    const z = Math.min(3, Math.max(1.2, +(innerWidth / 390).toFixed(2)));
-    store.set({ uiZoom: z });
-    document.documentElement.style.zoom = z;
+    store.set({ autoFit: true });
+    applyUiZoom();
     bar.hidden = true;
     setTimeout(() => { plan.reset(); applyTextScale(); }, 100);
     toast("Scaled to your screen. Undo it in ⚙.");
@@ -571,7 +578,7 @@ async function openSettings() {
       </div>
       <div class="set-group"><h3 class="eyebrow">Text size</h3>
         <div class="seg">${[[0.9, "A"], [1, "A"], [1.15, "A"], [1.3, "A"], [1.5, "A"]].map(([v], i) => `<button data-scale="${v}" class="${v === (store.get("textScale") || 1) ? "on" : ""}" style="font-size:${0.78 + i * 0.16}rem">A</button>`).join("")}</div>
-        ${store.get("uiZoom") > 1 ? `<button class="btn small" id="unzoom" style="margin-top:10px">↺ Undo “scale to my screen”</button>` : ""}
+        ${store.get("autoFit") ? `<button class="btn small" id="unzoom" style="margin-top:10px">↺ Undo “scale to my screen”</button>` : ""}
         <p style="margin-top:10px">Scales the whole interface, not just this menu. Handy in a dim gallery, or if you just want more on screen.</p>
       </div>
       <div class="set-group"><h3 class="eyebrow">Music under the voice</h3>
@@ -619,7 +626,7 @@ async function openSettings() {
   $$("[data-amb]", d).forEach((b) => (b.onclick = () => { ambient.setMode(b.dataset.amb); $$("[data-amb]", d).forEach((x) => x.classList.toggle("on", x === b)); }));
   $("#ambVol").oninput = (e) => ambient.setVolume(+e.target.value);
   $("#unzoom") && ($("#unzoom").onclick = () => {
-    store.set({ uiZoom: 0 });
+    store.set({ autoFit: false });
     document.documentElement.style.zoom = "";
     d.close();
     setTimeout(() => plan.reset(), 100);

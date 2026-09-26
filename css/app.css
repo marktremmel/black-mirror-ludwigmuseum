@@ -20,6 +20,8 @@
   color-scheme: dark;
 }
 html { font-size: 16px; }   /* the baseline; the text-size setting scales it */
+html, body { max-width: 100%; overflow-x: hidden; }
+@supports (overflow-x: clip) { html, body { overflow-x: clip; } }   /* keeps position:sticky working */
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-text-size-adjust: 100%; }
 body { min-height: 100dvh; padding-bottom: calc(var(--tabs-h) + var(--mini-h) + var(--safe-b) + 12px); overscroll-behavior-y: none; }
@@ -59,7 +61,8 @@ main { max-width: 1280px; margin: 0 auto; }
 .path-chip i { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; font-style: normal; font-weight: 800; font-size: 0.75rem; color: #0b0d10; background: var(--c, var(--muted)); }
 .path-chip.on { color: var(--text); border-color: var(--c, var(--accent)); background: color-mix(in srgb, var(--c, var(--accent)) 16%, var(--surface)); }
 
-.guide-grid { display: grid; gap: 14px; padding: 8px 16px 0; }
+.guide-grid { display: grid; gap: 14px; padding: 8px 16px 0; min-width: 0; }
+.map-col, .list-col { min-width: 0; max-width: 100%; }
 @media (min-width: 900px) {
   .guide-grid { grid-template-columns: minmax(0, 1.35fr) minmax(340px, 1fr); align-items: start; }
   .map-col { position: sticky; top: 72px; }
