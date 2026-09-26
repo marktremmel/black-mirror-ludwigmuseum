@@ -31,6 +31,7 @@ let sheetId = null;
 
 // ---------------------------------------------------------------- boot
 applyTextScale();
+applyUiZoom();
 addEventListener("resize", applyTextScale);
 await Promise.all([loadData(), loadGlossary()]);
 initPlan();
@@ -104,6 +105,33 @@ function selectPath(id, scroll = true) {
   renderStops();
   if (id !== "all") ambient.setMood(D.section[id].mood);
   if (scroll) $(`.path-chip[data-path="${id}"]`)?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+}
+
+// Safari's "Request Desktop Website" ignores the viewport meta and lays the page out at ~980px,
+// which shrinks everything on a phone. We can't override that, but page zoom cancels it out.
+function applyUiZoom() {
+  const z = store.get("uiZoom");
+  if (z > 1) document.documentElement.style.zoom = z;
+  setTimeout(desktopHint, 600);
+}
+function desktopHint() {
+  const bar = $("#fitbar");
+  // a touch device laying out at desktop width, where either the layout is wider than the
+  // physical screen or the pixel ratio has been diluted by the fake 980px viewport.
+  // A real tablet fails both tests, so it never sees this.
+  const wide = innerWidth >= 700 && matchMedia("(pointer: coarse)").matches
+    && (innerWidth > screen.width * 1.25 || devicePixelRatio < 2);
+  if (!wide || store.get("uiZoom") > 1 || store.get("hideDesktopHint")) return;
+  bar.hidden = false;
+  $("#fitNow").onclick = () => {
+    const z = Math.min(3, Math.max(1.2, +(innerWidth / 390).toFixed(2)));
+    store.set({ uiZoom: z });
+    document.documentElement.style.zoom = z;
+    bar.hidden = true;
+    setTimeout(() => { plan.reset(); applyTextScale(); }, 100);
+    toast("Scaled to your screen. Undo it in ⚙.");
+  };
+  $("#fitDismiss").onclick = () => { store.set({ hideDesktopHint: true }); bar.hidden = true; };
 }
 
 // Everything in the UI is sized in rem, so one number scales the whole interface.
@@ -543,6 +571,7 @@ async function openSettings() {
       </div>
       <div class="set-group"><h3 class="eyebrow">Text size</h3>
         <div class="seg">${[[0.9, "A"], [1, "A"], [1.15, "A"], [1.3, "A"], [1.5, "A"]].map(([v], i) => `<button data-scale="${v}" class="${v === (store.get("textScale") || 1) ? "on" : ""}" style="font-size:${0.78 + i * 0.16}rem">A</button>`).join("")}</div>
+        ${store.get("uiZoom") > 1 ? `<button class="btn small" id="unzoom" style="margin-top:10px">↺ Undo “scale to my screen”</button>` : ""}
         <p style="margin-top:10px">Scales the whole interface, not just this menu. Handy in a dim gallery, or if you just want more on screen.</p>
       </div>
       <div class="set-group"><h3 class="eyebrow">Music under the voice</h3>
@@ -589,6 +618,12 @@ async function openSettings() {
   $$("[data-rate]", d).forEach((b) => (b.onclick = () => { narrator.setRate(+b.dataset.rate); $$("[data-rate]", d).forEach((x) => x.classList.toggle("on", x === b)); renderPathHead(); renderStops(); }));
   $$("[data-amb]", d).forEach((b) => (b.onclick = () => { ambient.setMode(b.dataset.amb); $$("[data-amb]", d).forEach((x) => x.classList.toggle("on", x === b)); }));
   $("#ambVol").oninput = (e) => ambient.setVolume(+e.target.value);
+  $("#unzoom") && ($("#unzoom").onclick = () => {
+    store.set({ uiZoom: 0 });
+    document.documentElement.style.zoom = "";
+    d.close();
+    setTimeout(() => plan.reset(), 100);
+  });
   $$("[data-scale]", d).forEach((b) => (b.onclick = () => {
     store.set({ textScale: +b.dataset.scale });
     $$("[data-scale]", d).forEach((x) => x.classList.toggle("on", x === b));

@@ -17,6 +17,8 @@ const defaults = {
   listened: {},
   seenHint: false,
   textScale: 1,
+  uiZoom: 0,          // set when we compensate for Safari's desktop mode
+  hideDesktopHint: false,
 };
 
 let state = { ...defaults };

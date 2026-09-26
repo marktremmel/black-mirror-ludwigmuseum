@@ -404,3 +404,11 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .pick-grid small { display: block; font-size: 0.6875rem; color: var(--muted); padding: 2px 8px 0; }
 .pick-grid em { position: absolute; top: 6px; right: 8px; font-style: normal; color: #ff7a93; font-size: 1.125rem; text-shadow: 0 1px 4px #000; }
 .hand-card { border-color: color-mix(in srgb, var(--accent) 50%, var(--line)); }
+
+/* shown when a touch device lays the page out at desktop width */
+.fitbar { position: fixed; z-index: 100; left: 12px; right: 12px; top: 12px; padding: 14px 16px; border-radius: 16px;
+  background: #eef3f7; color: #0b0d10; box-shadow: 0 14px 40px #0009; font-size: 0.95rem; line-height: 1.45; }
+.fitbar p { margin: 0 0 10px; }
+.fitbar-btns { display: flex; gap: 8px; }
+.fitbar .btn { background: #0b0d10; color: #eef3f7; border-color: transparent; }
+.fitbar .btn.ghost { background: transparent; color: #46505c; }
