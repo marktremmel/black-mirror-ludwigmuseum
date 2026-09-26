@@ -36,9 +36,14 @@
       <div class="guide-grid">
         <div class="map-col">
           <div class="map-card" id="mapCard">
-            <svg id="plan" role="img" aria-label="Floor plan of the exhibition"></svg>
+            <div class="map-frame"><svg id="plan" role="img" aria-label="Floor plan of the exhibition"
+                 width="100%" height="100%" preserveAspectRatio="xMidYMid meet"></svg></div>
             <div class="map-tools">
-              <button class="chip-btn" id="zoomReset" aria-label="Reset map zoom">⤢</button>
+              <button class="chip-btn" id="zoomOut" aria-label="Zoom out">−</button>
+              <button class="chip-btn" id="zoomIn" aria-label="Zoom in">+</button>
+              <button class="chip-btn" id="zoomReset" aria-label="Fit the whole map">⤢</button>
+              <button class="chip-btn" id="mapRotate" aria-label="Rotate the map" hidden>⟳</button>
+              <button class="chip-btn" id="mapFull" aria-label="Full screen map">⛶</button>
             </div>
             <div class="map-hint" id="mapHint">Tap a dot · pinch to zoom · long-press to say “I’m here”</div>
           </div>

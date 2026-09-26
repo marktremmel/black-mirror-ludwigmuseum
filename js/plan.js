@@ -21,6 +21,7 @@ export class Plan {
     this.full = { x: -M, y: -M, w: W + 2 * M, h: H + 2 * M };
     this.vb = { ...this.full };
     this.pins = new Map();
+    this.rot = 0;                 // 0 or 90 degrees, for portrait phones
     this.path = null;
     this.sel = null;
     this.playing = null;
@@ -31,6 +32,21 @@ export class Plan {
   }
 
   P(pos) { return [pos[0] * this.W, pos[1] * this.H]; }
+
+  // full extent of the plan in the current rotation
+  get box() {
+    const M2 = 40;
+    return this.rot
+      ? { x: -M2, y: -M2, w: this.H + 2 * M2, h: this.W + 2 * M2 }
+      : { x: -M2, y: -M2, w: this.W + 2 * M2, h: this.H + 2 * M2 };
+  }
+  setRotation(deg) {
+    this.rot = deg ? 90 : 0;
+    this.world.setAttribute("transform", this.rot ? `translate(${this.H},0) rotate(90)` : "");
+    this.full = this.box;
+    this.vb = { ...this.full };
+    this.apply(true);
+  }
 
   draw() {
     const s = this.svg;
@@ -149,17 +165,37 @@ export class Plan {
   }
 
   focus(pos, zoom = 2.2) {
-    const [x, y] = this.P(pos);
+    let [x, y] = this.P(pos);
+    if (this.rot) [x, y] = [this.H - y, x];   // same transform as the world group
     const w = this.full.w / zoom, h = this.full.h / zoom;
     this.vb = this.clamp({ x: x - w / 2, y: y - h / 2, w, h });
     this.apply(true);
   }
   reset() { this.vb = { ...this.full }; this.apply(true); }
+  zoomBy(f) {
+    const v = this.vb;
+    const cx = v.x + v.w / 2, cy = v.y + v.h / 2;
+    const w = v.w * f, h = v.h * f;
+    this.vb = this.clamp({ x: cx - w / 2, y: cy - h / 2, w, h });
+    this.apply(true);
+  }
 
   // ---------------------------------------------------------------- render
-  k() { // plan units per CSS pixel
-    const w = this.svg.clientWidth || 1;
-    return this.vb.w / w;
+  // The SVG letterboxes its viewBox (preserveAspectRatio), so never assume the box
+  // matches the element: derive the real scale, and use the SVG's own matrix for points.
+  vbScale() {
+    const r = this.svg.getBoundingClientRect();
+    if (!r.width || !r.height) return 1;
+    return Math.min(r.width / this.vb.w, r.height / this.vb.h);
+  }
+  k() { return 1 / (this.vbScale() || 1); }   // map units per CSS pixel
+
+  // client point -> viewBox coordinates (screen-aligned, letterboxing included)
+  toVB(clientX, clientY) {
+    const r = this.svg.getBoundingClientRect();
+    const s = this.vbScale();
+    const ox = (r.width - this.vb.w * s) / 2, oy = (r.height - this.vb.h * s) / 2;
+    return [this.vb.x + (clientX - r.left - ox) / s, this.vb.y + (clientY - r.top - oy) / s];
   }
   apply(animate) {
     const { x, y, w, h } = this.vb;
@@ -180,28 +216,34 @@ export class Plan {
   }
   setVB(v) {
     this._cur = v;
+    if (!this.svg.clientWidth) {           // not laid out yet (hidden tab, slow first paint)
+      cancelAnimationFrame(this._retry);
+      this._retry = requestAnimationFrame(() => this.setVB(this._cur));
+    }
     this.svg.closest(".map-card")?.classList.toggle("zoomed", v.w < this.full.w - 1);
     this.svg.setAttribute("viewBox", `${v.x} ${v.y} ${v.w} ${v.h}`);
     const k = v.w / (this.svg.clientWidth || 1);
     // keep pins a constant on-screen size (~22px) regardless of zoom / screen width
     // ~20px pins on phones, ~22px on bigger screens; off-path pins shrink
     const s = Math.max(k, 0.55) * (this.svg.clientWidth < 500 ? 0.85 : 1);
+    const un = this.rot ? ` rotate(${-this.rot})` : "";
     for (const p of this.pins.values()) {
       const big = p.a.id === this.sel ? 1.3 : p.g.classList.contains("dim") ? 0.62 : 1;
-      p.g.setAttribute("transform", `translate(${p.x},${p.y}) scale(${s * big})`);
+      p.g.setAttribute("transform", `translate(${p.x},${p.y}) scale(${s * big})${un}`);
     }
     for (const pl of D.places) {
-      if (pl._g) pl._g.setAttribute("transform", `scale(${s})`);
+      if (pl._g) pl._g.setAttribute("transform", `scale(${s})${un}`);
       if (pl._label) {
         const [x, y] = this.P(pl.pos);
         pl._label.setAttribute("x", x + 14 * s);
         pl._label.setAttribute("y", y + 4 * s);
         pl._label.setAttribute("font-size", 11 * s);
+        pl._label.setAttribute("transform", this.rot ? `rotate(${-this.rot} ${x + 14 * s} ${y + 4 * s})` : "");
         pl._label.style.strokeWidth = 4 * s;
         pl._label.style.display = pl.id === "entrance" || k < 1.2 ? "" : "none";
       }
     }
-    if (this.meInner) this.meInner.setAttribute("transform", `scale(${s})`);
+    if (this.meInner) this.meInner.setAttribute("transform", `scale(${s})${un}`);
     const id = this.sel || this.playing;
     const p = id && this.pins.get(id);
     if (p) {
@@ -210,6 +252,7 @@ export class Plan {
       this.selLabel.setAttribute("y", p.y + 4 * s);
       this.selLabel.setAttribute("text-anchor", right ? "end" : "start");
       this.selLabel.setAttribute("font-size", 13 * s);
+      this.selLabel.setAttribute("transform", this.rot ? `rotate(${-this.rot} ${p.x + (right ? -18 : 18) * s} ${p.y + 4 * s})` : "");
       this.selLabel.style.strokeWidth = 4 * s;
     }
   }
@@ -224,12 +267,14 @@ export class Plan {
   }
 
   toPlan(clientX, clientY) {
-    const r = this.svg.getBoundingClientRect();
-    return [this.vb.x + (clientX - r.left) / r.width * this.vb.w, this.vb.y + (clientY - r.top) / r.height * this.vb.h];
+    const m = this.world.getScreenCTM();
+    if (!m) return this.toVB(clientX, clientY);
+    const p = new DOMPoint(clientX, clientY).matrixTransform(m.inverse());
+    return [p.x, p.y];
   }
 
   pickAt(clientX, clientY) {
-    const [px, py] = this.toPlan(clientX, clientY);
+    const [px, py] = this.toPlan(clientX, clientY);   // already in plan coordinates
     const k = this.k();
     let best = null, bd = Infinity;
     for (const [id, p] of this.pins) {
@@ -283,11 +328,15 @@ export class Plan {
         const d = Math.hypot(a[0] - b[0], a[1] - b[1]);
         const f = pinch.d / d;
         const v = pinch.vb;
-        const mx = v.x + (pinch.mid[0] - r.left) / r.width * v.w;
-        const my = v.y + (pinch.mid[1] - r.top) / r.height * v.h;
+        const saved = this.vb;
+        this.vb = v;
+        const [mx, my] = this.toVB(pinch.mid[0], pinch.mid[1]);   // anchor under the fingers
+        this.vb = saved;
         const w = v.w * f, h = v.h * f;
         const mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
-        this.vb = this.clamp({ x: mx - (mid[0] - r.left) / r.width * w, y: my - (mid[1] - r.top) / r.height * h, w, h });
+        const s2 = Math.min(r.width / w, r.height / h);
+        const ox = (r.width - w * s2) / 2, oy = (r.height - h * s2) / 2;
+        this.vb = this.clamp({ x: mx - (mid[0] - r.left - ox) / s2, y: my - (mid[1] - r.top - oy) / s2, w, h });
         this.apply();
         return;
       }
@@ -296,7 +345,8 @@ export class Plan {
       if (!moved && Math.hypot(dx, dy) > 6) { moved = true; clearTimeout(pressTimer); }
       if (moved && this.vb.w < this.full.w - 1) {
         s.classList.add("dragging");
-        this.vb = this.clamp({ ...start.vb, x: start.vb.x - dx / r.width * start.vb.w, y: start.vb.y - dy / r.height * start.vb.h });
+        const ps = Math.min(r.width / start.vb.w, r.height / start.vb.h) || 1;
+        this.vb = this.clamp({ ...start.vb, x: start.vb.x - dx / ps, y: start.vb.y - dy / ps });
         this.apply();
       }
     });
@@ -317,7 +367,7 @@ export class Plan {
     s.addEventListener("pointercancel", end);
     s.addEventListener("wheel", (e) => {
       e.preventDefault();
-      const [mx, my] = this.toPlan(e.clientX, e.clientY);
+      const [mx, my] = this.toVB(e.clientX, e.clientY);
       const f = Math.exp(e.deltaY * 0.0015);
       const v = this.vb;
       const w = v.w * f, h = v.h * f;
@@ -325,8 +375,8 @@ export class Plan {
       this.apply();
     }, { passive: false });
     s.addEventListener("dblclick", (e) => {
-      const [x, y] = this.toPlan(e.clientX, e.clientY);
       if (this.vb.w < this.full.w * 0.6) return this.reset();
+      const [x, y] = this.toPlan(e.clientX, e.clientY);
       this.focus([x / this.W, y / this.H], 2.4);
     });
   }

@@ -50,7 +50,7 @@ function initPlan() {
   plan = new Plan($("#plan"), {
     onPick: (id) => {
       if (!id) { plan.select(null); return; }
-      openSheet(id);
+      openSheet(id);   // the sheet sits above the full screen map, so it stays open behind
       if (!store.get("seenHint")) { store.set({ seenHint: true }); $("#mapHint").style.opacity = 0; }
     },
     onLongPress: (pos) => {
@@ -59,6 +59,12 @@ function initPlan() {
     },
   });
   $("#zoomReset").onclick = () => plan.reset();
+  $("#zoomIn").onclick = () => plan.zoomBy(1 / 1.6);
+  $("#zoomOut").onclick = () => plan.zoomBy(1.6);
+  // orientation changes and rotations: keep the view inside the plan
+  addEventListener("orientationchange", () => setTimeout(() => { if (mapFull) fitRotation(); plan.reset(); }, 250));
+  $("#mapFull").onclick = () => toggleMapFull();
+  $("#mapRotate").onclick = () => { plan.setRotation(plan.rot ? 0 : 90); };
   plan.setFavs(store.get("favs"));
   if (store.get("pos")) plan.setMe(store.get("pos"));
   store.on((patch) => {
@@ -66,6 +72,20 @@ function initPlan() {
     if ("favs" in patch) { plan.setFavs(patch.favs); renderMe(); }
   });
   on("heat", (h) => { plan.setHeat(h); clearTimeout(initPlan.t); initPlan.t = setTimeout(() => plan.setHeat([]), 8000); });
+}
+
+let mapFull = false;
+const portrait = () => innerHeight > innerWidth * 1.1;
+function fitRotation() { plan.setRotation(mapFull && portrait() ? 90 : 0); }
+function toggleMapFull(on = !mapFull) {
+  mapFull = on;
+  $("#mapCard").classList.toggle("full", on);
+  $("#mapFull").textContent = on ? "✕" : "⛶";
+  $("#mapFull").setAttribute("aria-label", on ? "Close full screen map" : "Full screen map");
+  $("#mapRotate").hidden = !on;
+  document.body.style.overflow = on ? "hidden" : "";
+  fitRotation();
+  requestAnimationFrame(() => plan.reset());
 }
 
 // ---------------------------------------------------------------- paths
@@ -661,7 +681,7 @@ function bindChrome() {
   };
   locator.onSnap = (blob, tag) => { lab.mount().then(() => lab.loadBlob(blob, tag)); };
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") { if (!$("#reader").hidden) history.back(); else closeSheet(); }
+    if (e.key === "Escape") { if (mapFull) toggleMapFull(false); else if (!$("#reader").hidden) history.back(); else closeSheet(); }
     if (e.key === " " && e.target === document.body) { e.preventDefault(); narrator.toggle(); }
   });
   on("remixes-changed", () => { if (!document.querySelector("#me .rf")) renderMe(); });

@@ -67,7 +67,9 @@ main { max-width: 1280px; margin: 0 auto; }
 
 /* ---------------------------------------------------------------- map */
 .map-card { position: relative; border-radius: var(--radius); background: radial-gradient(140% 100% at 50% 0%, #151b22, #0d1014 70%); border: 1px solid var(--line); overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; }
-#plan { width: 100%; height: auto; aspect-ratio: 1080 / 850; cursor: grab; }
+/* padding box, so the map is sized correctly even where CSS aspect-ratio isn't applied to SVG */
+.map-frame { position: relative; width: 100%; padding-top: 78.7%; }
+#plan { position: absolute; inset: 0; width: 100%; height: 100%; cursor: grab; touch-action: none; }
 #plan.dragging { cursor: grabbing; }
 .plan-floor { fill: #ffffff05; }
 .plan-wall { fill: var(--wall); opacity: .85; }
@@ -92,10 +94,15 @@ main { max-width: 1280px; margin: 0 auto; }
 .heat { mix-blend-mode: screen; pointer-events: none; }
 @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.6); } }
 @keyframes ring { 0% { transform: scale(.6); opacity: .9; } 100% { transform: scale(2.4); opacity: 0; } }
-.map-tools { position: absolute; right: 8px; bottom: 8px; display: none; gap: 6px; }
-.map-card.zoomed .map-tools { display: flex; }
+.map-tools { position: absolute; right: 8px; bottom: 8px; display: flex; gap: 6px; z-index: 2; }
+/* full screen map: fills the window, and can be turned sideways so a portrait phone shows much more */
+.map-card.full { position: fixed; inset: 0; z-index: 38; border-radius: 0; border: 0; padding-top: env(safe-area-inset-top, 0px); }
+.map-card.full .map-frame { padding-top: 0; height: calc(100vh - env(safe-area-inset-top, 0px)); }
+@supports (height: 100dvh) { .map-card.full .map-frame { height: calc(100dvh - env(safe-area-inset-top, 0px)); } }
+.map-card.full .map-tools { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); right: 14px; }
+.map-card.full .map-hint { bottom: calc(18px + env(safe-area-inset-bottom, 0px)); }
 .map-card.zoomed .map-hint { opacity: 0 !important; }
-.chip-btn { min-width: 34px; height: 34px; border-radius: 10px; background: #0b0d10cc; border: 1px solid var(--line); color: var(--muted); font-size: 1.0rem; }
+.chip-btn { min-width: 36px; height: 36px; border-radius: 10px; background: #0b0d10cc; border: 1px solid var(--line); color: var(--muted); font-size: 1.0rem; }
 .map-hint { position: absolute; left: 10px; bottom: 8px; font-size: 0.75rem; color: var(--faint); pointer-events: none; transition: opacity .6s; }
 
 /* near */
