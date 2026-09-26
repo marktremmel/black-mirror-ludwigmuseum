@@ -20,8 +20,10 @@
   color-scheme: dark;
 }
 html { font-size: 16px; }   /* the baseline; the text-size setting scales it */
-html, body { max-width: 100%; overflow-x: hidden; }
-@supports (overflow-x: clip) { html, body { overflow-x: clip; } }   /* keeps position:sticky working */
+/* Safety net against a stray wide child. NOT on html/body: overflow on the root propagates to
+   the viewport and clips fixed elements (the player bar vanished in Firefox). "clip" only, so
+   this never becomes a scroll container and sticky keeps working. */
+main { overflow-x: clip; }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font); -webkit-text-size-adjust: 100%; }
 body { min-height: 100dvh; padding-bottom: calc(var(--tabs-h) + var(--mini-h) + var(--safe-b) + 12px); overscroll-behavior-y: none; }
@@ -293,7 +295,9 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .lab, .me { padding: 12px 16px 24px; max-width: 900px; margin: 0 auto; }
 .lab h2, .me h2 { font-size: 1.375rem; margin: 6px 0 4px; }
 .lab > p, .me > p { color: var(--muted); margin: 0 0 14px; font-size: 0.875rem; line-height: 1.45; }
-.stage-wrap { position: relative; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--line); touch-action: none; }
+.stage-wrap { position: sticky; top: 54px; z-index: 5; border-radius: 16px; overflow: hidden; background: #000; border: 1px solid var(--line); touch-action: none;
+  box-shadow: 0 10px 30px #0007; }
+.stage-wrap canvas { max-height: 46dvh; width: auto; max-width: 100%; margin: 0 auto; }
 .stage-wrap canvas { width: 100%; height: auto; display: block; }
 .stage-empty { display: grid; place-items: center; aspect-ratio: 1; gap: 10px; text-align: center; padding: 20px; color: var(--muted); }
 .lab-tools { display: flex; gap: 8px; overflow-x: auto; margin: 12px 0; scrollbar-width: none; }
@@ -306,7 +310,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .drawer-tabs { display: flex; gap: 4px; overflow-x: auto; padding: 8px; border-bottom: 1px solid var(--line); scrollbar-width: none; }
 .drawer-tabs button { flex: none; height: 30px; padding: 0 10px; border-radius: 9px; font-size: 0.75rem; color: var(--muted); }
 .drawer-tabs button.on { background: var(--surface2); color: var(--text); }
-.drawer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; padding: 8px; max-height: 240px; overflow-y: auto; }
+.drawer-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 6px; padding: 8px; }
 .drawer-grid button { aspect-ratio: 1; border-radius: 10px; background: var(--surface2); padding: 6px; }
 .drawer-grid img { width: 100%; height: 100%; object-fit: contain; }
 .sel-bar { display: flex; gap: 8px; align-items: center; margin-top: 10px; flex-wrap: wrap; }
@@ -314,7 +318,7 @@ input[type=range] { width: 100%; accent-color: var(--accent); }
 .gallery figure { margin: 0; position: relative; border-radius: 12px; overflow: hidden; border: 1px solid var(--line); background: var(--surface); }
 .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; }
 .gallery figcaption { font-size: 0.6875rem; color: var(--muted); padding: 6px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.gallery .x { position: absolute; top: 6px; right: 6px; width: 28px; height: 28px; border-radius: 50%; background: #000a; font-size: 0.875rem; }
+.gallery .x { position: absolute; top: 6px; right: 6px; width: 32px; height: 32px; border-radius: 50%; background: #000c; border: 1px solid #ffffff33; font-size: 1rem; color: #fff; }
 .textin { width: 100%; height: 42px; border-radius: 10px; background: var(--surface); color: var(--text); border: 1px solid var(--line); padding: 0 12px; font: inherit; }
 .card { border-radius: 16px; background: var(--surface); border: 1px solid var(--line); padding: 16px; margin-bottom: 12px; }
 .card h3 { margin: 0 0 6px; font-size: 1.0rem; }

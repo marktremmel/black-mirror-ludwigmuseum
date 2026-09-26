@@ -135,9 +135,10 @@ class Lab {
       <div class="path-actions" style="margin-top:12px">
         <button class="btn primary" id="saveRemix">💾 Save remix</button>
         <button class="btn" id="shareRemix">↗ Share / download</button>
+        <button class="btn ghost" id="clearRemix">🗑 Start a new one</button>
       </div>
       <p class="small-print">Tip: drag to move · pinch (or the corner handle) to resize & rotate · tap empty space to deselect.</p>` : ""}
-      <h3 class="eyebrow" style="margin-top:22px">Saved remixes</h3>
+      <h3 class="eyebrow" style="margin-top:22px">Saved remixes <span style="text-transform:none;letter-spacing:0;font-weight:400">· tap ✕ to delete one</span></h3>
       <div class="gallery" id="gallery"></div>
       <p class="small-print" style="margin-top:14px">Stickers: Designsoup Urban Grunge decals · Cursed set by Ash N Ink · erikari lovely stickers · plus the capybara, cyber-beast, manga, Aria, bubloo and planet packs. Used here for a school project, not redistributed.</p>`;
 
@@ -162,6 +163,12 @@ class Lab {
     const ti = $("#textIn");
     if (ti) ti.oninput = () => { const it = this.items[this.sel]; if (it?.type === "text") { it.text = ti.value || " "; this.draw(); } };
     $("#saveRemix").onclick = () => this.save();
+    $("#clearRemix").onclick = () => {
+      if (this.items.length && !confirm("Clear this picture and start a new one? Saved remixes are kept.")) return;
+      this.base = null; this.items = []; this.sel = null; this.artId = null; this.filter = "none";
+      this.render();
+      emit("toast", "Cleared. Pick a new photo.");
+    };
     $("#shareRemix").onclick = () => this.share();
     this.bindStage();
   }
@@ -365,7 +372,7 @@ class Lab {
   async save() {
     const blob = await this.blob();
     await remixes.put({ id: "r" + Date.now(), at: Date.now(), artId: this.artId, blob });
-    emit("toast", "Saved to your remixes ✓");
+    emit("toast", "Saved ✓ Tap “Start a new one” for another.");
     this.renderGallery();
     emit("remixes-changed");
   }
